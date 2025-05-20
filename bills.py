@@ -44,7 +44,7 @@ def save_bills(bills):
 
 def group_paid_bills_by_theme(bills):
     grouped_totals = defaultdict(float)
-    longest_name = max(len(bill['event_theme']) for bill in bills['bills'] if bill['event_theme'] not in ['Robin Paid', 'Carreen Paid'])
+    longest_name = max(len(bill['event_theme']) for bill in bills['bills'])
 
     for bill in bills['bills']:
         if bill["paid"] == 1:
@@ -64,12 +64,11 @@ def view_bills(bills):
     else:
         print("\033[1;32mYour bills:\033[0m\n")
 
-        longest_name = max(len(bill["event_theme"]) for bill in bills_list if bill["event_theme"] not in ['Robin Paid', 'Carreen Paid'])
+        longest_name = max(len(bill["event_theme"]) for bill in bills_list)
 
         for bill in bills_list:
-            if bill["event_theme"] not in ["Robin Paid", "Carreen Paid"]:
-                status = "[Paid]" if bill["paid"] == 1 else "      "
-                print(f"- {format_event_date(bill['event_date'])} - {bill['event_theme'].ljust(longest_name)} {status} ${bill['amount']}")
+            status = "[Paid]" if bill["paid"] == 1 else "      "
+            print(f"- {format_event_date(bill['event_date'])} - {bill['event_theme'].ljust(longest_name)} {status} ${bill['amount']}")
 
         input("\nPress Enter to return to the menu...")
         os.system("cls" if os.name == "nt" else "clear")
@@ -84,10 +83,10 @@ def view_unpaid_bills(bills):
     else:
         print("\033[1;32mYour UNPAID bills:\033[0m\n")
         
-        longest_name = max(len(bill['event_theme']) for bill in bills_list if bill['event_theme'] not in ['Robin Paid', 'Carreen Paid'])
+        longest_name = max(len(bill['event_theme']) for bill in bills_list)
 
         for idx, bill in enumerate(bills_list):
-            if bill['event_theme'] not in ['Robin Paid', 'Carreen Paid'] and bill['paid'] != 1:
+            if bill['paid'] != 1:
                 status = "✅" if bill['paid'] == 1 else ""
                 print(f"{idx + 1}. {format_event_date(bill['event_date'])} - {bill['event_theme'].ljust(longest_name)} {status} ${bill['amount']}")
 
@@ -123,9 +122,7 @@ def add_bills(bills):
         "Rent": "fas fa-home",
         "Car Insurance": "fas fa-bolt",
         "Internet": "fas fa-network-wired",
-        "Groceries": "fas fa-shopping-cart",
-        "Robin Paid": "fas fa-wallet",
-        "Carreen Paid": "fas fa-wallet"
+        "Groceries": "fas fa-shopping-cart"
     }
     icon = icons.get(event_theme, "fas fa-file-invoice")
 
@@ -160,7 +157,7 @@ def delete_bills(bills):
         return
 
     indexed_bills = sorted(
-        [(idx, bill) for idx, bill in enumerate(bills["bills"]) if bill["event_theme"] not in ["Robin Paid", "Carreen Paid"]],
+        [(idx, bill) for idx, bill in enumerate(bills["bills"])],
         key=lambda item: datetime.strptime(item[1]["event_date"], "%a %b %d %Y"),
         reverse=True
     )
@@ -200,7 +197,7 @@ def delete_bills(bills):
 
 def pay_bills(bills):
     unpaid_bills = sorted(
-        [(idx, bill) for idx, bill in enumerate(bills["bills"]) if bill["event_theme"] not in ["Robin Paid", "Carreen Paid"] and bill["paid"] != 1],
+        [(idx, bill) for idx, bill in enumerate(bills["bills"]) if bill["paid"] != 1],
         key=lambda item: datetime.strptime(item[1]["event_date"], "%a %b %d %Y"), reverse=True
     )
 
@@ -217,8 +214,6 @@ def pay_bills(bills):
         user_input = input("\nEnter the task number to mark as paid (or 'b' to go back): ").strip()
 
         if user_input.lower() == "b":
-            #print("Returning to main menu...")
-            #sleep(0.5)
             os.system("cls" if os.name == "nt" else "clear")
             return
 
@@ -228,10 +223,10 @@ def pay_bills(bills):
                 original_idx = unpaid_bills[task_number - 1][0]
                 bills["bills"][original_idx]["paid"] = 1
                 save_bills(bills)
-                print("Task marked as paid.")
+                print("Bills marked as paid.")
                 return
             else:
-                print("Invalid task number. Please choose a valid number from the list.")
+                print("Invalid bill number. Please choose a valid number from the list.")
 
         except ValueError:
             print("Enter a valid number.")
