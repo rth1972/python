@@ -294,5 +294,5 @@ def main():
             os.system("cls" if os.name == "nt" else "clear")
 
 
-#curses.wrapper(welcome_screen)
+curses.wrapper(welcome_screen)
 main()
