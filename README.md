@@ -1,7 +1,3 @@
-Absolutely! Here's a **professional README.md** for your **Bills Manager** project, complete with **badges, a logo, and a polished layout**.
-
----
-
 # 💰 Bills Manager
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/rth1972/Bill_Manager?style=for-the-badge)  
