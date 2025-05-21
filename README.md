@@ -4,9 +4,9 @@ Absolutely! Here's a **professional README.md** for your **Bills Manager** proje
 
 # 💰 Bills Manager
 
-![GitHub repo size](https://img.shields.io/github/repo-size/rth1972/BillsManager?style=for-the-badge)  
-![GitHub last commit](https://img.shields.io/github/last-commit/rth1972/BillsManager?style=for-the-badge)  
-![GitHub license](https://img.shields.io/github/license/rth1972/BillsManager?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/rth1972/Bill_Manager?style=for-the-badge)  
+![GitHub last commit](https://img.shields.io/github/last-commit/rth1972/Bill_Manager?style=for-the-badge)  
+![GitHub license](https://img.shields.io/github/license/rth1972/Bill_Manager?style=for-the-badge)
 
 **Bills Manager** is a **Python-based command-line application** designed to help users **track, manage, and organize their bills** efficiently. It provides an intuitive interface for adding, viewing, and updating bill records.
 
