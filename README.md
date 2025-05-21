@@ -59,4 +59,6 @@ Contributions are welcome! If you’d like to enhance the functionality or add f
    ```
 4. Push and submit a pull request!
 
----
+## 🖼️ Screenshot
+
+## ![Bills Manager Screenshot](bills.png)
