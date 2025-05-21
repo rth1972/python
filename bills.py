@@ -93,7 +93,7 @@ def view_unpaid_bills(bills):
 def add_bills(bills):
     os.system("cls" if os.name == "nt" else "clear")
     print("\033[1;32m💰 Add a New Bill 💳\033[0m\n")
-
+    
     while True:
         event_date_input = input("Enter the event date (MM/DD/YYYY): ").strip()
         event_date = validate_date(event_date_input)
@@ -139,7 +139,7 @@ def add_bills(bills):
     try:
         with open(file_name, "w") as file:
             json.dump(bills, file, indent=4)
-        print("\nill added successfully!")
+        print("\nBill added successfully!")
     except:
         print("Failed to save the bill.")
 
