@@ -195,6 +195,55 @@ def delete_bills(bills):
     input("\nPress Enter to return to the menu...")
     os.system("cls" if os.name == "nt" else "clear")
 
+def search_bills(bills):
+    os.system("cls" if os.name == "nt" else "clear")
+    print("\033[1;32m🔍 Search Bills\033[0m\n")
+
+    search_term = input("Enter an event date, theme, amount, or payment status to search: ").strip().lower()
+
+    matching_bills = [
+        bill for bill in bills["bills"]
+        if search_term in bill["event_date"].lower()
+        or search_term in bill["event_theme"].lower()
+        or search_term in str(bill["amount"]).lower()
+        or search_term in ("paid" if bill["paid"] else "unpaid")
+    ]
+
+    if not matching_bills:
+        print("\nNo bills found matching your search.")
+        input("\nPress Enter to return to the menu...")
+        return
+
+    print("\n\033[1;34mMatching Bills:\033[0m\n")
+    for idx, bill in enumerate(matching_bills, start=1):
+        print(f"{idx}. {bill['event_theme']} - ${bill['amount']} ({'Paid' if bill['paid'] else 'Unpaid'})")
+
+    # Let user select a bill or go back
+    while True:
+        choice = input("\nEnter the number of the bill you want to see details of, or 'b' to go back: ").strip()
+
+        if choice.lower() == 'b':
+            print("Returning to the main menu...")
+            os.system("cls" if os.name == "nt" else "clear")
+            return  
+
+        try:
+            choice = int(choice)
+            if 1 <= choice <= len(matching_bills):
+                selected_bill = matching_bills[choice - 1]
+                print("\n\033[1;32mBill Details:\033[0m")
+                print(f"Date: {selected_bill['event_date']}")
+                print(f"Name: {selected_bill['event_theme']}")
+                print(f"Amount: ${selected_bill['amount']}")
+                print(f"Paid: {'Yes' if selected_bill['paid'] else 'No'}")
+                input("\nPress Enter to return to the menu...")
+                os.system("cls" if os.name == "nt" else "clear")
+                return  
+            else:
+                print("Invalid choice. Please enter a valid number.")
+        except ValueError:
+            print("Enter a valid number or 'b' to go back.")
+
 def pay_bills(bills):
     unpaid_bills = sorted(
         [(idx, bill) for idx, bill in enumerate(bills["bills"]) if bill["paid"] != 1],
@@ -262,7 +311,7 @@ def main():
     
     while True:
         print("\033[1;32mBill Manager\033[0m\n")
-        print("1. View Bills\n2. View Unpaid Bills\n3. Add Bills\n4. Pay Bills\n5. Delete Bills\n6. Grouped Bills\n7. Exit\n")
+        print("1. View Bills\n2. View Unpaid Bills\n3. Add Bills\n4. Pay Bills\n5. Delete Bills\n6. Grouped Bills\n7. Search Bills\nq. Exit\n")
         choice = input("Enter Your Choice: ").strip()
 
         if choice == "1":
@@ -285,6 +334,8 @@ def main():
             input("\nPress Enter to return to the menu...")
             os.system("cls" if os.name == "nt" else "clear")
         elif choice == "7":
+            search_bills(bills)
+        elif choice == "q":
             os.system("cls" if os.name == "nt" else "clear")
            # curses.wrapper(exit_screen)
             break
