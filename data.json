@@ -15,18 +15,25 @@
             "icon": "fas fa-car-burst"
         },
         {
-            "event_date": "Fri May 23 2025",
-            "event_theme": "Internet",
-            "paid": 0,
-            "amount": 114.95,
-            "icon": "fas fa-network-wired"
-        },
-        {
             "event_date": "Mon May 05 2025",
             "event_theme": "Car Insurance",
             "paid": 1,
             "amount": 92.27,
             "icon": "fas fa-car-burst"
+        },
+        {
+            "event_date": "Fri May 23 2025",
+            "event_theme": "Internet",
+            "paid": 1,
+            "amount": 114.95,
+            "icon": "fas fa-network-wired"
+        },
+        {
+            "event_date": "Thu Jun 05 2025",
+            "event_theme": "Car Insurance",
+            "paid": 0,
+            "amount": 92.24,
+            "icon": "fas fa-bolt"
         }
     ]
 }
